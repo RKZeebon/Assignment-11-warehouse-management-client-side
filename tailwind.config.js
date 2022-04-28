@@ -3,7 +3,15 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif'],
+        'Anek': ['Anek Tamil', 'sans-serif'],
+        'Roboto': ['Roboto', 'sans-serif']
+      },
+
+
+    },
   },
   plugins: [],
 }
