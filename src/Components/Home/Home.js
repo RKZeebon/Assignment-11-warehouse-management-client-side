@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Banner from '../Banner/Banner';
 import HomeInventory from '../Inventory/HomeInventory';
 import Recent from '../RecentProducts/Recent';
+import Shortage from '../ShortageProducts/Shortage';
 
 const Home = () => {
     const [products, setProducts] = useState([])
@@ -32,7 +33,7 @@ const Home = () => {
             </div>
 
             <Recent />
-
+            <Shortage />
         </div>
     );
 };

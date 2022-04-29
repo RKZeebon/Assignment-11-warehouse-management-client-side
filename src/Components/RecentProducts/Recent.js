@@ -22,7 +22,7 @@ const Recent = () => {
 
 const RecentProduct = ({ product }) => {
     const { name, img, price, quantity } = product;
-    console.log(product);
+
     return (
         <div className='mt-8'>
             <div className='border-4 rounded-lg border-white p-2'>
