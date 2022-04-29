@@ -12,7 +12,7 @@ const Navbar = () => {
                 <div className='text-white text-3xl lg:hidden font-bold' onClick={() => setOpen(!open)}>
                     {open ? <div>✕</div> : <div>☳</div>}
                 </div>
-                <div className={`lg:flex items-center ${open ? 'absolute lg:static block right-0 left-0 top-16 bg-blue-500 p-2' : 'hidden'}`}>
+                <div onClick={() => setOpen(false)} className={`lg:flex items-center ${open ? 'absolute lg:static block right-0 left-0 top-16 bg-blue-500 p-2' : 'hidden'}`}>
                     <div className={'my-2'} >
                         <NavLink className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/home'}>Home</NavLink>
                     </div>
