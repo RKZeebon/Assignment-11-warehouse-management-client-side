@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeInventory = ({ product }) => {
-    const { name, img, description, price, quantity, supplier } = product;
+    const navigate = useNavigate()
+    const { name, img, description, price, quantity, supplier, _id } = product;
+    const handleUpdate = id => {
+        navigate(`/inventory/${id}`)
+    }
     return (
         <div className='mt-4'>
             <div className='border-l-4 border-r-4 border-t-4 border-[royalblue] p-2 rounded-tl-lg rounded-tr-lg'>
@@ -12,7 +17,7 @@ const HomeInventory = ({ product }) => {
                 <p className='text-lg'><span className='font-semibold'>Supplier:</span> {supplier}</p>
                 <p className='text-lg'><span className='font-semibold'>Description:</span> {description.slice(0, 250) + ' .....'}</p>
             </div>
-            <div className='bg-[royalblue] text-center text-2xl py-2 hover:text-white hover:bg-blue-800'>
+            <div onClick={() => handleUpdate(_id)} className='bg-[royalblue] text-center text-2xl py-2 hover:text-white hover:bg-blue-800 cursor-pointer'>
                 <button className='font-semibold'>Update Stock</button>
             </div>
         </div>
