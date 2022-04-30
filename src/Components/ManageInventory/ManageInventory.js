@@ -10,7 +10,7 @@ const ManageInventory = () => {
             <div className='mt-8 text-center text-3xl'>
                 <Link to='/add-item' className='font-bold font-poppins bg-blue-400 py-2 px-5 rounded-lg hover:bg-[royalblue] hover:text-white'>+ Add New Item</Link>
             </div>
-            <div className='md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 my-8'>
+            <div className='md:grid md:grid-cols-2 gap-5 my-8'>
                 {
                     products.map(p => <Allproducts
                         key={p._id}

@@ -52,7 +52,7 @@ const AddItem = () => {
                     <input className='rounded-lg p-2 w-full border-2 border-black' type="number" name="quantity" id="" placeholder='Quantity' required />
                 </div>
                 <div className='mb-2 text-lg'>
-                    <textarea className='rounded-lg p-2 w-full border-2 border-black' name="description" id="" cols="30" rows="10" placeholder='Description'></textarea>
+                    <textarea className='rounded-lg p-2 w-full border-2 border-black' name="description" id="" cols="30" rows="5" placeholder='Description'></textarea>
                 </div>
                 <div className='text-center bg-blue-400 rounded-lg hover:bg-[royalblue] hover:text-white cursor-pointer'><input className=' text-2xl py-2 font-semibold font-Roboto cursor-pointer w-full' type="submit" value="Add Item" /></div>
             </form>
