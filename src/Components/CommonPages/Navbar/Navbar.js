@@ -6,7 +6,7 @@ const Navbar = () => {
     const [open, setOpen] = useState(false)
 
     return (
-        <div className='bg-blue-500 '>
+        <div className='bg-blue-500 sticky top-0'>
             <div className='flex items-center justify-between lg:w-5/6 lg:mx-auto h-16 px-5'>
                 <h1 className='text-2xl tracking-wider underline lg:text-4xl font-bold font-Roboto whitespace-nowrap uppercase'>Computer City</h1>
                 <div className='text-white text-3xl lg:hidden font-bold' onClick={() => setOpen(!open)}>
@@ -24,10 +24,11 @@ const Navbar = () => {
                     </div>
                     <div className='lg:flex items-center'>
                         <div className={'my-2'} >
+                            <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/manage-inventory'}>Manage Items</NavLink>
+                        </div>
+                        <div className={'my-2'} >
                             <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/add-item'}>Add Item</NavLink>
                         </div>
-
-
                         <div className={'my-2'} >
                             <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/my-items'}>My Items</NavLink>
                         </div>

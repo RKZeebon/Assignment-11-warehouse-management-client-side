@@ -1,5 +1,6 @@
 import React from 'react';
 import useProducts from '../../Hooks/UseProducts';
+import noImg from '../../Assets/noimage-found.png'
 
 const Shortage = () => {
     const [products] = useProducts()
@@ -25,7 +26,7 @@ const ShortProduct = ({ product }) => {
     return (
         <div className='mt-8 bg-white rounded-md'>
             <div className='border-4 rounded-lg border-white p-2'>
-                <img className='rounded-tl-lg rounded-tr-lg mb-2' src={img} alt="" />
+                <img className='rounded-tl-lg rounded-tr-lg mb-2' src={img || noImg} alt="" />
                 <h1 className='text-3xl text-center font-semibold'>{name}</h1>
                 <h4 className='text-xl text-center font-semibold'>Quantity: {quantity}</h4>
             </div>
