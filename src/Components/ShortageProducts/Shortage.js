@@ -3,7 +3,7 @@ import useProducts from '../../Hooks/UseProducts';
 
 const Shortage = () => {
     const [products] = useProducts()
-    const shortProducts = products.filter(p => p.quantity < 10)
+    const shortProducts = products.filter(p => p.quantity <= 5)
     return (
         <div className='w-5/6 mx-auto mt-24 mb-5 bg-blue-300 p-4 rounded-md'>
             <h1 className='text-center text-4xl font-Roboto font-semibold mt-2'>Shortage Products</h1>

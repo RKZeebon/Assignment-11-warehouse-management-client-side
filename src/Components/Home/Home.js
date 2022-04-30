@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Banner from '../Banner/Banner';
 import HomeInventory from '../Inventory/HomeInventory';
 import Recent from '../RecentProducts/Recent';
@@ -7,12 +7,18 @@ import Shortage from '../ShortageProducts/Shortage';
 
 const Home = () => {
     const [products, setProducts] = useState([])
-    const navigate = useNavigate()
+
+
     useEffect(() => {
-        fetch('https://guarded-gorge-33419.herokuapp.com/sixproducts')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [])
+        const fetchData = async () => {
+            const url = `https://guarded-gorge-33419.herokuapp.com/sixproducts`
+            const response = await fetch(url);
+            const Data = await response.json();
+            setProducts(Data)
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <div className='min-h-[850px]'>
@@ -28,7 +34,7 @@ const Home = () => {
                     }
                 </div>
                 <div className='my-5 text-center text-3xl'>
-                    <button onClick={() => navigate('/inventory')} className='font-bold font-poppins text-[royalblue] hover:underline'>Manage Inventory ⪼</button>
+                    <Link to='/manage-inventory' className='font-bold font-poppins text-[royalblue] hover:underline'>Manage Inventory ⪼</Link>
                 </div>
             </div>
 

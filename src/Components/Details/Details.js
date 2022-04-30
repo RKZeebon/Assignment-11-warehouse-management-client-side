@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Details = () => {
     const { id } = useParams()
@@ -50,7 +50,7 @@ const Details = () => {
     }, [isUpdate])
 
     return (
-        <div className='w-5/6 mx-auto mb-16'>
+        <div className='w-5/6 mx-auto mb-12'>
             <div className='lg:w-4/6 lg:mx-auto my-12 border-2 border-black rounded-lg p-5'>
                 <img className='mb-5' src={img} alt="" />
                 <h1 className='text-4xl font-semibold font-Roboto mb-1'>Item: {name}</h1>
@@ -66,7 +66,9 @@ const Details = () => {
                 <input className='text-xl p-2 mr-5 border-2 border-black rounded-lg' type="number" name="restock" id="" placeholder='Quantity' />
                 <input className='text-xl text-white bg-[royalblue] hover:bg-white hover:text-black py-2 px-4 rounded-lg font-medium font-poppins' type="submit" value="Restock" />
             </form>
-
+            <div className='mt-16 text-center text-3xl'>
+                <Link to='/manage-inventory' className='font-bold font-poppins text-[royalblue] hover:underline'>Manage Inventory ⪼</Link>
+            </div>
         </div >
     );
 };

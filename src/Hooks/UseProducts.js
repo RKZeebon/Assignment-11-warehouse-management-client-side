@@ -2,11 +2,17 @@ import { useEffect, useState } from "react"
 
 const useProducts = () => {
     const [products, setProducts] = useState([])
+
     useEffect(() => {
-        fetch('https://guarded-gorge-33419.herokuapp.com/products')
-            .then(res => res.json())
-            .then(data => setProducts(data))
+        const fetchData = async () => {
+            const response = await fetch('https://guarded-gorge-33419.herokuapp.com/products')
+            const data = await response.json()
+            setProducts(data)
+
+        }
+        fetchData()
     }, [])
+
     return [products, setProducts]
 }
 
