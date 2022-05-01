@@ -8,6 +8,7 @@ import Home from './Components/Home/Home';
 import Inventory from './Components/Inventory/Inventory';
 import Login from './Components/Login/Login';
 import ManageInventory from './Components/ManageInventory/ManageInventory';
+import MyItems from './Components/MyItems/MyItems';
 import Register from './Components/Register/Register';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/inventory/:id' element={<Details />}></Route>
         <Route path='/manage-inventory' element={<ManageInventory />}></Route>
         <Route path='/add-item' element={<AddItem />}></Route>
+        <Route path='/my-items' element={<MyItems />}></Route>
       </Routes>
       <Footer />
     </div>

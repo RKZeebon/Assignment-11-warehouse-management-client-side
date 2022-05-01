@@ -28,9 +28,9 @@ const RecentProduct = ({ product }) => {
         <div className='mt-8'>
             <div className='border-4 rounded-lg border-white p-2'>
                 <img className='rounded-tl-lg rounded-tr-lg mb-2' src={img || noImg} alt="" />
-                <h1 className='text-3xl text-center font-semibold'>{name}</h1>
-                <h3 className='text-2xl text-center font-semibold'>Price: ${price}</h3>
-                <h4 className='text-xl text-center font-semibold'>Quantity: {quantity}</h4>
+                <h1 className='text-2xl text-center font-semibold'>{name}</h1>
+                <h3 className='text-xl text-center font-semibold'>Price: ${price}</h3>
+                <h4 className='text-lg text-center font-semibold'>Quantity: {quantity}</h4>
             </div>
 
         </div>

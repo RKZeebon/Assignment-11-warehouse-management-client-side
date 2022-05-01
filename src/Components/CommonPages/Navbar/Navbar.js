@@ -15,7 +15,7 @@ const Navbar = () => {
         signOut(auth);
     };
     return (
-        <div className='bg-blue-500 sticky top-0'>
+        <div className='bg-blue-500 sticky top-0 z-50'>
             <div className='flex items-center justify-between lg:w-5/6 lg:mx-auto h-16 px-5'>
                 <h1 className='text-2xl tracking-wider underline lg:text-4xl font-bold font-Roboto whitespace-nowrap uppercase'>Computer City</h1>
                 <div className='text-white text-3xl lg:hidden font-bold' onClick={() => setOpen(!open)}>
