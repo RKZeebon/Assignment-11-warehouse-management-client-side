@@ -54,7 +54,7 @@ const Register = () => {
 
     }
 
-    const handleSignUp = async event => {
+    const handleSignUp = event => {
         event.preventDefault();
         const name = event.target.name.value
         const email = event.target.email.value;
@@ -62,8 +62,8 @@ const Register = () => {
         const confirmPass = event.target.confirmPass.value
 
         if (pass === confirmPass) {
-            await createUserWithEmailAndPassword(email, pass);
-            await updateProfile({ displayName: name });
+            createUserWithEmailAndPassword(email, pass);
+            updateProfile({ displayName: name });
 
         }
 

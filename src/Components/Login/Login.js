@@ -1,51 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import gLogo from '../../Assets/google-logo.ico'
 import gitLogo from '../../Assets/git-logo.ico'
 import auth from '../../Firebase.init';
-import { useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
     const navigate = useNavigate()
+    const [email, setEmail] = useState('')
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-    let passError;
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
+
+    let passErrorMsg;
+    let resetErrormsg;
+
 
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
     let googleErrorMsgs;
     let gitErrorMsgs;
     if (error) {
-        passError = <div>
+        passErrorMsg = <div>
             <p className='text-red-600 font-bold text-center mt-8'> {error.message}</p>
         </div>
         googleErrorMsgs = '';
         gitErrorMsgs = '';
+        resetErrormsg = '';
+    }
+
+    if (resetError) {
+        resetErrormsg = <div>
+            <p className='text-red-600 font-bold text-center mt-8'> {resetError.message}</p>
+        </div>
+        passErrorMsg = '';
+        googleErrorMsgs = '';
+        gitErrorMsgs = '';
+
     }
 
     if (googleError) {
         googleErrorMsgs = <div>
             <p className='text-red-600 font-bold text-center mt-8'> {googleError.message}</p>
         </div>
-        passError = '';
+        passErrorMsg = '';
         gitErrorMsgs = '';
+        resetErrormsg = '';
     }
     if (gitError) {
         gitErrorMsgs = <div>
             <p className='text-red-600 font-bold text-center mt-8'> {gitError.message}</p>
         </div>
-        passError = '';
+        passErrorMsg = '';
         googleErrorMsgs = '';
+        resetErrormsg = '';
     }
 
 
 
     if (loading || googleLoading || gitLoading) {
-        return <p>Loading...</p>;
+        return <p>Please Wait...</p>;
     }
 
     if (user || googleUser || gitUser) {
@@ -53,13 +72,23 @@ const Login = () => {
 
     }
 
-    const handlesignin = async event => {
+    const handlesignin = event => {
         event.preventDefault()
         const email = event.target.email.value;
         const pass = event.target.pass.value;
 
-        await signInWithEmailAndPassword(email, pass)
+        signInWithEmailAndPassword(email, pass)
 
+    }
+    const handleResetPass = () => {
+        if (email) {
+            sendPasswordResetEmail(email);
+            toast('Email sent');
+            setEmail('')
+        }
+        else {
+            toast('Please enter your email');
+        }
     }
 
 
@@ -70,15 +99,17 @@ const Login = () => {
                 <h1 className='text-3xl font-Roboto font-semibold text-[royalblue] text-center'>Please login</h1>
                 <form onSubmit={handlesignin}>
                     <div>
-                        <input className='text-xl my-3 border-2 border-black w-full p-2 rounded-md' type="email" name="email" id="email" placeholder='Enter Your Email' required />
+                        <input onChange={(e) => setEmail(e.target.value)} className='text-xl my-3 border-2 border-black w-full p-2 rounded-md' type="email" name="email" id="email" placeholder='Enter Your Email' required />
                     </div>
                     <div>
                         <input className='text-xl my-3 border-2 border-black w-full p-2 rounded-md' type="password" name="pass" id="password" placeholder='Enter Your Password' required />
                     </div>
-                    {passError}
+                    {passErrorMsg}
                     <div className='bg-blue-400 text-center my-5 rounded-md hover:bg-[royalblue] hover:text-white cursor-pointer shadow-md shadow-[royalblue]'><input className='text-2xl font-Roboto font-semibold cursor-pointer w-full py-2' type="submit" value="Login" /></div>
                 </form>
-                <p className='text-lg text-center'>New here? Please <Link className='text-[royalblue] font-semibold' to='/register'>Register</Link></p>
+                <p className='text-lg text-center'>New Here? Please <Link className='text-[royalblue] font-semibold' to='/register'>Register</Link></p>
+                {resetErrormsg}
+                <p className='text-lg text-center'>Forget Password? <button onClick={handleResetPass} className='text-[royalblue] font-semibold'>Reset</button></p>
                 <div className='flex items-center justify-center mt-8'>
                     <div className='bg-blue-400 h-[2px] mr-1 w-full'></div>
                     <p>Or</p>
@@ -95,6 +126,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
