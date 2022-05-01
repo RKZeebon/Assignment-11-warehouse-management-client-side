@@ -8,7 +8,7 @@ const Recent = () => {
     return (
         <div className='w-5/6 mx-auto mt-24 mb-12 bg-blue-300 py-5 px-3 rounded-md'>
             <h1 className='text-center text-4xl font-semibold font-Roboto'>Most Recent Products</h1>
-            <div className='md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-12 mt-2'>
+            <div className='md:grid md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-12 mt-2'>
                 {
                     recentProducts.map(product => <RecentProduct
                         key={product._id}

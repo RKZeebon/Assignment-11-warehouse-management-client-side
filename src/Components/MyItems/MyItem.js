@@ -5,7 +5,7 @@ const MyItem = ({ product, handleDelete }) => {
     const { name, img, description, price, quantity, supplier, _id } = product;
     return (
         <div className='mt-4'>
-            <div className='relative p-2 rounded-lg  md:min-h-[550px] shadow-xl shadow-blue-400'>
+            <div className='relative p-2 rounded-lg  min-h-[550px] shadow-xl shadow-blue-400'>
                 <img className='rounded-tl-lg rounded-tr-lg mb-2' src={img || noImg} alt="" />
                 <h1 className='text-2xl font-semibold'>Item: {name}</h1>
                 <h3 className='text-xl font-semibold'>Price: ${price}</h3>

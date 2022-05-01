@@ -25,7 +25,7 @@ const Home = () => {
             <Banner />
             <div className='my-16'>
                 <h1 className='text-5xl text-center text-[royalblue] font-poppins font-bold'>ᵒᴼᵒ Inventory ᵒᴼᵒ</h1>
-                <div className='w-5/6 mx-auto md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mt-5'>
+                <div className='w-5/6 mx-auto md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-12 mt-5'>
                     {
                         products.map(product => <HomeInventory
                             key={product._id}
