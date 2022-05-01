@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useProducts from '../../Hooks/UseProducts';
 import noImg from '../../Assets/noimage-found.png'
 const Inventory = () => {
-    const [products] = useProducts()
+    const { products } = useProducts()
 
     return (
         <div>

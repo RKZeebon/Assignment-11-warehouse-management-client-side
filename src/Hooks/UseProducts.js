@@ -2,18 +2,14 @@ import { useEffect, useState } from "react"
 
 const useProducts = () => {
     const [products, setProducts] = useState([])
-
+    const [isReload, setIsReload] = useState(false)
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch('https://guarded-gorge-33419.herokuapp.com/products')
-            const data = await response.json()
-            setProducts(data)
+        fetch('https://guarded-gorge-33419.herokuapp.com/products')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [isReload])
 
-        }
-        fetchData()
-    }, [])
-
-    return [products, setProducts]
+    return { products, setProducts, isReload, setIsReload }
 }
 
 export default useProducts;

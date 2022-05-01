@@ -16,7 +16,6 @@ const AddItem = () => {
         const description = event.target.description.value;
         const email = user.email;
 
-        console.log(name, img, supplier, price, quantity, description);
         fetch('https://guarded-gorge-33419.herokuapp.com/product', {
             method: 'POST',
             body: JSON.stringify({

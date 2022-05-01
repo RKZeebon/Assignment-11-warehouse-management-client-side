@@ -3,7 +3,7 @@ import useProducts from '../../Hooks/UseProducts';
 import noImg from '../../Assets/noimage-found.png'
 
 const Recent = () => {
-    const [products] = useProducts()
+    const { products } = useProducts()
     const recentProducts = products.map(p => p).reverse().slice(0, 5)
     return (
         <div className='w-5/6 mx-auto mt-24 mb-12 bg-blue-300 py-5 px-3 rounded-md'>

@@ -3,7 +3,7 @@ import useProducts from '../../Hooks/UseProducts';
 import noImg from '../../Assets/noimage-found.png'
 
 const Shortage = () => {
-    const [products] = useProducts()
+    const { products } = useProducts()
     const shortProducts = products.filter(p => p.quantity <= 5)
     return (
         <div className='w-5/6 mx-auto mt-24 mb-5 bg-blue-300 p-4 rounded-md'>

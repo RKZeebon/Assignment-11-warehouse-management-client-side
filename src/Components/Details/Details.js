@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import noImg from '../../Assets/noimage-found.png'
 
 const Details = () => {
@@ -25,6 +26,7 @@ const Details = () => {
         setIsUpdate(!isUpdate)
         if (parseInt(quantity) > 0) {
             setNewQuantity(parseInt(quantity) - 1)
+            toast('You delevered one item.')
         }
 
     }
@@ -35,8 +37,10 @@ const Details = () => {
         if (parseInt(reStockQuantity) > 0) {
             setNewQuantity(parseInt(quantity) + parseInt(reStockQuantity))
             event.target.reset();
+            toast('Restock sucessfull!')
         }
         setIsUpdate(!isUpdate)
+
     }
     useEffect(() => {
 
@@ -62,7 +66,7 @@ const Details = () => {
                 <h1 className='text-3xl font-semibold font-Roboto mb-1'>Item: {name}</h1>
                 <p className='text-lg mb-1 font-semibold'>ID: {_id}</p>
                 <h3 className='text-xl font-semibold mb-1'>Price: ${price}</h3>
-                <h4 className='flex text-lg font-semibold mb-1'>Quantity: {quantity} {quantity > 0 ? <p className='ml-2 bg-green-100 rounded px-2 text-green-600'> In Stock</p> : <p className='ml-2 bg-red-100 rounded px-2 text-red-600'>Out of Stock</p>} </h4>
+                <h4 className='flex text-lg font-semibold mb-1'>Quantity: {newQuantity || quantity} {quantity > 0 ? <p className='ml-2 bg-green-100 rounded px-2 text-green-600'> In Stock</p> : <p className='ml-2 bg-red-100 rounded px-2 text-red-600'>Out of Stock</p>} </h4>
                 <p className='text-md mb-1'><span className='font-semibold'>Supplier:</span> {supplier}</p>
                 <p className='text-md mb-1'><span className='font-semibold'>Description:</span> {description}</p>
                 <div className='text-2xl text-right mt-8'><button onClick={HandleDelivered} className='font-semibold bg-blue-400 hover:bg-[royalblue] px-5 py-2 rounded-lg hover:text-white shadow-lg shadow-black'>Delivered</button></div>
@@ -75,6 +79,7 @@ const Details = () => {
             <div className='mt-16 text-center text-3xl'>
                 <Link to='/manage-inventory' className='font-bold font-poppins text-[royalblue] hover:underline'>Manage Inventory ⪼</Link>
             </div>
+            <ToastContainer />
         </div >
     );
 };
