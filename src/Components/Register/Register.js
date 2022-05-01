@@ -46,7 +46,7 @@ const Register = () => {
 
 
     if (loading || updating || googleLoading || gitLoading) {
-        return <p>Loading...</p>;
+        return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>;
     }
 
     if (user || googleUser || gitUser) {

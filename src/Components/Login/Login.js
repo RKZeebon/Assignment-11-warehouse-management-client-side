@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gLogo from '../../Assets/google-logo.ico'
 import gitLogo from '../../Assets/git-logo.ico'
 import auth from '../../Firebase.init';
@@ -9,6 +9,8 @@ import { toast, ToastContainer } from 'react-toastify';
 const Login = () => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/home';
     const [
         signInWithEmailAndPassword,
         user,
@@ -64,11 +66,11 @@ const Login = () => {
 
 
     if (loading || googleLoading || gitLoading) {
-        return <p>Please Wait...</p>;
+        return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>
     }
 
     if (user || googleUser || gitUser) {
-        navigate('/')
+        navigate(from, { replace: true })
 
     }
 

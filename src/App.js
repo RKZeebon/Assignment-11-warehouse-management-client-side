@@ -10,6 +10,7 @@ import Login from './Components/Login/Login';
 import ManageInventory from './Components/ManageInventory/ManageInventory';
 import MyItems from './Components/MyItems/MyItems';
 import Register from './Components/Register/Register';
+import RequireAuth from './Components/RequireAuth/RequireAuth';
 
 function App() {
   return (
@@ -21,10 +22,26 @@ function App() {
         <Route path='/inventory' element={<Inventory />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
-        <Route path='/inventory/:id' element={<Details />}></Route>
-        <Route path='/manage-inventory' element={<ManageInventory />}></Route>
-        <Route path='/add-item' element={<AddItem />}></Route>
-        <Route path='/my-items' element={<MyItems />}></Route>
+        <Route path='/inventory/:id' element={
+          <RequireAuth>
+            <Details />
+          </RequireAuth>
+        }></Route>
+        <Route path='/manage-inventory' element={
+          <RequireAuth>
+            <ManageInventory />
+          </RequireAuth>
+        }></Route>
+        <Route path='/add-item' element={
+          <RequireAuth>
+            <AddItem />
+          </RequireAuth>
+        }></Route>
+        <Route path='/my-items' element={
+          <RequireAuth>
+            <MyItems />
+          </RequireAuth>
+        }></Route>
       </Routes>
       <Footer />
     </div>
