@@ -7,7 +7,7 @@ const Inventory = () => {
 
     return (
         <div>
-            <div className='min-h-[850px] my-8 w-5/6 mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
+            <div className='min-h-[850px] my-8 w-5/6 mx-auto grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
                 {
                     products.map(p => <AllProducts
                         key={p._id}

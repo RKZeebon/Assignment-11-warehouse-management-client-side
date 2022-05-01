@@ -51,7 +51,7 @@ const MyItems = () => {
                 {myItems.length < 1 ?
                     <p className='text-center text-2xl font-Roboto font-medium'>You haven't added any item yet.</p>
                     :
-                    <div className='grid md:grid-cols-3 gap-5'>
+                    <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
                         {
                             myItems.map(p => <MyItem
                                 key={p._id}

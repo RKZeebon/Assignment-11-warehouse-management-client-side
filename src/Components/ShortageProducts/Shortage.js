@@ -8,7 +8,7 @@ const Shortage = () => {
     return (
         <div className='w-5/6 mx-auto mt-24 mb-5 bg-blue-300 p-4 rounded-md'>
             <h1 className='text-center text-4xl font-Roboto font-semibold mt-2'>Shortage Products</h1>
-            <div className='grid md:grid-cols-3 lg:grid-cols-5 gap-5'>
+            <div className='grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5'>
                 {
                     shortProducts.map(p => <ShortProduct
                         key={p._id}
