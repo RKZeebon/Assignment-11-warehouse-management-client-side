@@ -1,10 +1,19 @@
+import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
 import { NavLink } from 'react-router-dom';
+import auth from '../../../Firebase.init';
 import './Navbar.css'
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
+    const [user] = useAuthState(auth);
 
+
+    const logout = () => {
+        signOut(auth);
+    };
     return (
         <div className='bg-blue-500 sticky top-0'>
             <div className='flex items-center justify-between lg:w-5/6 lg:mx-auto h-16 px-5'>
@@ -19,25 +28,32 @@ const Navbar = () => {
                     <div className={'my-2'} >
                         <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/inventory'}>Inventory</NavLink>
                     </div>
-                    <div className={'my-2'} >
-                        <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/login'}>Login</NavLink>
-                    </div>
-                    <div className='lg:flex items-center'>
-                        <div className={'my-2'} >
-                            <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/manage-inventory'}>Manage Items</NavLink>
-                        </div>
-                        <div className={'my-2'} >
-                            <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/add-item'}>Add Item</NavLink>
-                        </div>
-                        <div className={'my-2'} >
-                            <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/my-items'}>My Items</NavLink>
-                        </div>
+                    {
+                        user ?
+                            <div className='lg:flex items-center'>
+                                <div className={'my-2'} >
+                                    <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/manage-inventory'}>Manage Items</NavLink>
+                                </div>
+                                <div className={'my-2'} >
+                                    <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/add-item'}>Add Item</NavLink>
+                                </div>
+                                <div className={'my-2'} >
+                                    <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/my-items'}>My Items</NavLink>
+                                </div>
 
 
-                        <div className={'my-2'} >
-                            <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/'}>Log Out</NavLink>
-                        </div>
-                    </div>
+                                <div onClick={logout} className={'my-2'} >
+                                    <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/'}>Log Out</NavLink>
+                                </div>
+                            </div>
+                            :
+                            <div className={'my-2'} >
+                                <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/login'}>Login</NavLink>
+                            </div>
+
+                    }
+
+
                 </div>
             </div>
         </div>

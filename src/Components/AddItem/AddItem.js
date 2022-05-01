@@ -1,8 +1,11 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import auth from '../../Firebase.init';
 
 const AddItem = () => {
+    const [user] = useAuthState(auth);
     const handleAddItem = event => {
         event.preventDefault()
         const name = event.target.name.value;
@@ -11,6 +14,7 @@ const AddItem = () => {
         const price = event.target.price.value;
         const quantity = event.target.quantity.value;
         const description = event.target.description.value;
+        const email = user.email;
 
         console.log(name, img, supplier, price, quantity, description);
         fetch('https://guarded-gorge-33419.herokuapp.com/product', {
@@ -21,7 +25,8 @@ const AddItem = () => {
                 supplier,
                 price,
                 quantity,
-                description
+                description,
+                email
             }),
             headers: {
                 'Content-type': 'application/json',

@@ -2,7 +2,7 @@ import React from 'react';
 import gLogo from '../../Assets/google-logo.ico'
 import gitLogo from '../../Assets/git-logo.ico'
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase.init';
 
 const Register = () => {
@@ -13,33 +13,47 @@ const Register = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+    let passError;
     const [updateProfile, updating] = useUpdateProfile(auth);
 
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
+    let googleErrorMsgs;
+    let gitErrorMsgs;
     if (error) {
-        return (
-            <div>
-                <p>Error: {error.message}</p>
-            </div>
-        );
-    }
-    if (loading || updating) {
-        return <p>Loading...</p>;
-    }
-    if (user) {
-        return (
-            <div>
-                <p>Registered User: {user.email}</p>
-            </div>
-        );
+        passError = <div>
+            <p className='text-red-600 font-bold text-center mt-8'> {error.message}</p>
+        </div>
+        googleErrorMsgs = '';
+        gitErrorMsgs = '';
     }
 
-    // const handleRegister = event => {
-    //     event.preventDefault()
-    //     const email = event.target.email.value;
-    //     const pass = event.target.pass.value;
-    //     console.log(email, pass);
-    //     createUserWithEmailAndPassword(email, pass)
-    // }
+    if (googleError) {
+        googleErrorMsgs = <div>
+            <p className='text-red-600 font-bold text-center mt-8'> {googleError.message}</p>
+        </div>
+        passError = '';
+        gitErrorMsgs = '';
+    }
+    if (gitError) {
+        gitErrorMsgs = <div>
+            <p className='text-red-600 font-bold text-center mt-8'> {gitError.message}</p>
+        </div>
+        passError = '';
+        googleErrorMsgs = '';
+    }
+
+
+
+    if (loading || updating || googleLoading || gitLoading) {
+        return <p>Loading...</p>;
+    }
+
+    if (user || googleUser || gitUser) {
+        navigate('/')
+
+    }
+
     const handleSignUp = async event => {
         event.preventDefault();
         const name = event.target.name.value
@@ -49,8 +63,8 @@ const Register = () => {
 
         if (pass === confirmPass) {
             await createUserWithEmailAndPassword(email, pass);
-            navigate('/')
             await updateProfile({ displayName: name });
+
         }
 
 
@@ -74,6 +88,7 @@ const Register = () => {
                     <div>
                         <input className='text-xl my-3 border-2 border-black w-full p-2 rounded-md' type="password" name="confirmPass" id="confirmPass" placeholder='Confirm Password' />
                     </div>
+                    {passError}
                     <div className='bg-blue-400 text-center my-5 rounded-md hover:bg-[royalblue] hover:text-white cursor-pointer shadow-md shadow-[royalblue]'><input className='text-2xl font-Roboto font-semibold cursor-pointer w-full py-2' type="submit" value="Sign Up" /></div>
                 </form>
                 <p className='text-lg text-center'>Already have an account? <Link className='text-[royalblue] font-semibold' to='/login'>Login</Link></p>
@@ -83,14 +98,17 @@ const Register = () => {
                     <div className='bg-blue-400 h-[2px] ml-1 w-full'></div>
                 </div>
                 <div>
-                    <div className='text-center bg-blue-400 my-3 rounded-md shadow-md shadow-[royalblue] hover:bg-[royalblue] hover:text-white cursor-pointer'>
+                    {googleErrorMsgs}
+                    <div onClick={() => signInWithGoogle()} className='text-center bg-blue-400 my-3 rounded-md shadow-md shadow-[royalblue] hover:bg-[royalblue] hover:text-white cursor-pointer'>
                         <button className='text-xl font-semibold w-full py-2'> <img className='inline-block' src={gLogo} alt="" /> Continue With Google</button>
                     </div>
-                    <div className='text-center bg-blue-400 my-3  rounded-md shadow-md shadow-[royalblue] hover:bg-[royalblue] hover:text-white cursor-pointer'>
+                    {gitErrorMsgs}
+                    <div onClick={() => signInWithGithub()} className='text-center bg-blue-400 my-3  rounded-md shadow-md shadow-[royalblue] hover:bg-[royalblue] hover:text-white cursor-pointer'>
                         <button className='text-xl font-semibold w-full py-2'> <img className='inline-block' src={gitLogo} alt="" /> Continue With Github</button>
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };
