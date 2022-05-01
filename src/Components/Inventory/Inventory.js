@@ -5,6 +5,11 @@ import noImg from '../../Assets/noimage-found.png'
 const Inventory = () => {
     const { products } = useProducts()
 
+
+    if (products.length <= 0) {
+        return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>
+    }
+
     return (
         <div>
             <div className='min-h-[850px] my-8 w-5/6 mx-auto grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5'>

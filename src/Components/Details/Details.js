@@ -59,6 +59,10 @@ const Details = () => {
 
     }, [isUpdate])
 
+    if (product.length <= 0) {
+        return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>
+    }
+
     return (
         <div className='w-5/6 mx-auto mb-12 min-h-[850px]'>
             <div className='lg:w-4/6 lg:mx-auto my-12 border-2 border-black rounded-lg p-5'>

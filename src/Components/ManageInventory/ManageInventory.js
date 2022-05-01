@@ -1,20 +1,14 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import useProducts from '../../Hooks/UseProducts';
 import Allproducts from './AllProducts/Allproducts';
 
 const ManageInventory = () => {
     const [openModal, setOpenModal] = useState(false)
     const [id, setId] = useState('')
-    const [products, setProducts] = useState([])
-
-    useEffect(() => {
-        fetch('https://guarded-gorge-33419.herokuapp.com/products')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-
-    }, [])
+    const { products, setProducts } = useProducts()
 
     const handleYes = () => {
         setOpenModal(false)
@@ -37,7 +31,9 @@ const ManageInventory = () => {
 
 
     }
-
+    if (products.length <= 0) {
+        return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>
+    }
 
     return (
         <div>

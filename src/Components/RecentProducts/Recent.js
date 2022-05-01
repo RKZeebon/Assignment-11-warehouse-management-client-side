@@ -5,6 +5,11 @@ import noImg from '../../Assets/noimage-found.png'
 const Recent = () => {
     const { products } = useProducts()
     const recentProducts = products.map(p => p).reverse().slice(0, 5)
+
+    if (products.length <= 0) {
+        return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>
+    }
+
     return (
         <div className='w-5/6 mx-auto mt-24 mb-12 bg-blue-300 py-5 px-3 rounded-md'>
             <h1 className='text-center text-4xl font-semibold font-Roboto'>Most Recent Products</h1>

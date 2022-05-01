@@ -5,6 +5,11 @@ import noImg from '../../Assets/noimage-found.png'
 const Shortage = () => {
     const { products } = useProducts()
     const shortProducts = products.filter(p => p.quantity <= 5)
+
+    if (products.length <= 0) {
+        return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>
+    }
+
     return (
         <div className='w-5/6 mx-auto mt-24 mb-5 bg-blue-300 p-4 rounded-md'>
             <h1 className='text-center text-4xl font-Roboto font-semibold mt-2'>Shortage Products</h1>

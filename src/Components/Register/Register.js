@@ -12,7 +12,7 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     let passError;
     const [updateProfile, updating] = useUpdateProfile(auth);
 

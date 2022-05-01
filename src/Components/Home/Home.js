@@ -19,6 +19,9 @@ const Home = () => {
 
         fetchData();
     }, []);
+    if (products.length <= 0) {
+        return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>
+    }
 
     return (
         <div className='min-h-[850px]'>
