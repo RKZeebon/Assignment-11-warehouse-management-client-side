@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import gLogo from '../../Assets/google-logo.ico'
 import gitLogo from '../../Assets/git-logo.ico'
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../Firebase.init';
+
 const Login = () => {
+
+
     return (
         <div className='min-h-[850px]'>
 
@@ -10,10 +15,10 @@ const Login = () => {
                 <h1 className='text-3xl font-Roboto font-semibold text-[royalblue] text-center'>Please login</h1>
                 <form>
                     <div>
-                        <input className='text-xl my-3 border-2 border-black w-full p-2 rounded-md' type="email" name="email" id="" placeholder='Enter Your Email' />
+                        <input className='text-xl my-3 border-2 border-black w-full p-2 rounded-md' type="email" name="email" id="email" placeholder='Enter Your Email' />
                     </div>
                     <div>
-                        <input className='text-xl my-3 border-2 border-black w-full p-2 rounded-md' type="password" name="pass" id="" placeholder='Enter Your Password' />
+                        <input className='text-xl my-3 border-2 border-black w-full p-2 rounded-md' type="password" name="pass" id="password" placeholder='Enter Your Password' />
                     </div>
                     <div className='bg-blue-400 text-center my-5 rounded-md hover:bg-[royalblue] hover:text-white cursor-pointer shadow-md shadow-[royalblue]'><input className='text-2xl font-Roboto font-semibold cursor-pointer w-full py-2' type="submit" value="Login" /></div>
                 </form>
