@@ -15,7 +15,11 @@ const MyItems = () => {
 
     useEffect(() => {
         const url = `https://guarded-gorge-33419.herokuapp.com/userProducts?email=${email}`
-        fetch(url)
+        fetch(url, {
+            headers: {
+                authorization: `${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => setMyItems(data))
 

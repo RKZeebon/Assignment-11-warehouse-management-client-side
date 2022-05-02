@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import gLogo from '../../Assets/google-logo.ico'
 import gitLogo from '../../Assets/git-logo.ico'
 import auth from '../../Firebase.init';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
@@ -13,7 +13,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/home';
     const [
         signInWithEmailAndPassword,
-        user,
+        passUser,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
@@ -27,6 +27,10 @@ const Login = () => {
     const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
     let googleErrorMsgs;
     let gitErrorMsgs;
+
+    const [user] = useAuthState(auth);
+
+
     if (error) {
         passErrorMsg = <div>
             <p className='text-red-600 font-bold text-center mt-8'> {error.message}</p>
@@ -69,8 +73,25 @@ const Login = () => {
         return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>
     }
 
-    if (user || googleUser || gitUser) {
-        navigate(from, { replace: true })
+    if (passUser || googleUser || gitUser) {
+        const url = 'https://guarded-gorge-33419.herokuapp.com/login'
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                email: user.email
+            }),
+            headers: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                localStorage.setItem('accessToken', data.token)
+                navigate(from, { replace: true })
+            });
+
+
+
 
     }
 

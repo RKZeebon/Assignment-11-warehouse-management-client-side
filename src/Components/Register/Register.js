@@ -2,14 +2,14 @@ import React from 'react';
 import gLogo from '../../Assets/google-logo.ico'
 import gitLogo from '../../Assets/git-logo.ico'
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase.init';
 
 const Register = () => {
     const navigate = useNavigate()
     const [
         createUserWithEmailAndPassword,
-        user,
+        passUser,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
@@ -20,6 +20,9 @@ const Register = () => {
     const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
     let googleErrorMsgs;
     let gitErrorMsgs;
+
+    const [user] = useAuthState(auth);
+
     if (error) {
         passError = <div>
             <p className='text-red-600 font-bold text-center mt-8'> {error.message}</p>
@@ -49,8 +52,23 @@ const Register = () => {
         return <p className='text-2xl text-center font-Roboto font-semibold min-h-[750px]'>Please Wait...</p>;
     }
 
-    if (user || googleUser || gitUser) {
-        navigate('/')
+    if (passUser || googleUser || gitUser) {
+        const url = 'http://localhost:5000/login'
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                email: user.email
+            }),
+            headers: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                localStorage.setItem('accessToken', data.token)
+                navigate('/')
+            });
+
 
     }
 
