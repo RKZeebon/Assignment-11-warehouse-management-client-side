@@ -47,7 +47,7 @@ const Navbar = () => {
 
 
                                 <div onClick={logout} className={'my-2'} >
-                                    <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/'}>Log Out</NavLink>
+                                    <NavLink onClick={() => setOpen(false)} className='nav-link' to={'/'}>Log Out</NavLink>
                                 </div>
                             </div>
                             :
