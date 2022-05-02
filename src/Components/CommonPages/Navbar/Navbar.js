@@ -28,6 +28,9 @@ const Navbar = () => {
                     <div className={'my-2'} >
                         <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/inventory'}>Inventory</NavLink>
                     </div>
+                    <div className={'my-2'} >
+                        <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/blogs'}>Blogs</NavLink>
+                    </div>
                     {
                         user ?
                             <div className='lg:flex items-center'>
